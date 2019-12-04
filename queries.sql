@@ -36,7 +36,7 @@ SELECT t.transport_id,
 FROM transport AS t
 LEFT JOIN income AS i ON t.transport_id = i.transport_id
 GROUP BY t.transport_id
-ORDER BY total_work_days_transport DESC ;
+ORDER BY total_income_transport DESC ;
 
 
 # 6) get people who have birthday in May;

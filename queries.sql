@@ -20,7 +20,7 @@ INNER JOIN salary AS s ON e.employe_id = s.employe_id
 GROUP BY p.position_id;
 
 # 4) get total number of days every person worked and total income;
-SELECT e.employe_id,
+SELECT SQL_NO_CACHE e.employe_id,
        COUNT(i.date) AS total_work_days_employe,
        SUM(i.earnings) AS total_income_employe
 FROM employe AS e
@@ -49,3 +49,11 @@ WHERE MONTH(e.dob) = '05';
 SELECT e.employe_id,
        (UNIX_TIMESTAMP(CURDATE()) - UNIX_TIMESTAMP(e.start_of_w)) / 31556926 AS years_works
 FROM employe AS e;
+
+# select drivers
+SELECT e.employe_id
+FROM employe AS e
+         LEFT JOIN position AS p ON e.position_id = p.position_id
+WHERE p.position_explanation like 'driver%';
+
+ALTER TABLE income ADD UNIQUE KEY `tran_date` (transport_id, date);

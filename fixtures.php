@@ -16,17 +16,19 @@ class Fixtures
         $connection = $this->getConnection();
 
         try {
+
             $connection->beginTransaction();
-
             $this->cleanup();
+            $connection->commit();
 
+            $connection->beginTransaction();
             $this->generatePositions ( 16);
             $this->generateEmployes(200);
             $this->generateTransports(65);
             $this->generateSalaries();
             $this->generateIncomes();
-
             $connection->commit();
+
         } catch (Exception $e) {
             $connection->rollBack();
             echo $e->getMessage();
